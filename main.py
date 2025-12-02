@@ -401,6 +401,11 @@ def logout(response: Response):
     response = RedirectResponse(url=FRONTEND_URL)
     response.delete_cookie("session_id")
     return response
+    
+@app.get("/ping")
+def ping():
+    return {message:"PING"}
+
 
 
 
