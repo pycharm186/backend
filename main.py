@@ -237,9 +237,15 @@ async def google_callback(code: str, response: Response):
 
     # Keep path same as your Next.js dashboard route
     resp = RedirectResponse(f"{FRONTEND_URL}/pages/dashboard")
-    resp.set_cookie("session_id", session_id, httponly=True, samesite="Lax")
-
+    resp.set_cookie(
+        key="session_id",
+        value=session_id,
+        httponly=True,
+        secure=True,
+        samesite="None"
+    )
     return resp
+
 
 
 def get_session(request: Request):
@@ -389,6 +395,7 @@ async def delete_email(data: dict, session=Depends(get_session)):
         return {"status": "Delete failed"}
 
     return {"status": f"Deleted email {idx}"}
+
 
 
 
