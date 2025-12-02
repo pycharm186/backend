@@ -385,16 +385,18 @@ async def delete_email(data: dict, session=Depends(get_session)):
     headers = {"Authorization": f"Bearer {session['access_token']}"}
 
     async with httpx.AsyncClient() as client:
-        delete_res = await client.delete(
-            f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{mid}",
-            headers=headers,
+        trash_res = await client.post(
+            f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{mid}/trash",
+            headers=headers
         )
 
-    if delete_res.status_code not in [200, 204]:
-        print("Gmail delete error:", delete_res.text)
-        return {"status": "Delete failed"}
+    if trash_res.status_code not in [200]:
+        print("Gmail TRASH error:", trash_res.text)
+        return {"status": "Trash failed"}
 
-    return {"status": f"Deleted email {idx}"}
+    return {"status": f"Moved email {idx} to Trash"}
+
+
 
 
 
