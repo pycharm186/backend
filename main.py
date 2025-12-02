@@ -396,6 +396,12 @@ async def delete_email(data: dict, session=Depends(get_session)):
 
     return {"status": f"Moved email {idx} to Trash"}
 
+@app.get("/auth/logout")
+def logout(response: Response):
+    response = RedirectResponse(url=FRONTEND_URL)
+    response.delete_cookie("session_id")
+    return response
+
 
 
 
