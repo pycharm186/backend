@@ -391,5 +391,5 @@ async def delete_email(data: dict, session=Depends(get_session)):
     return {"status": f"Deleted email {idx}"}
 
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
+
