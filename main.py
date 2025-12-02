@@ -404,7 +404,8 @@ def logout(response: Response):
     
 @app.get("/ping")
 def ping():
-    return {message:"PING"}
+    return {"message":"PING"}
+
 
 
 
